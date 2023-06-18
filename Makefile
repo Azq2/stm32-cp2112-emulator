@@ -19,7 +19,7 @@ include rules.mk
 include $(OPENCM3_DIR)/mk/genlink-rules.mk
 
 ifeq ($(BMP_PORT),)
-	BMP_PORT_CANDIDATES := $(wildcard /dev/serial/by-id/usb-Black_Sphere_Technologies_Black_Magic_Probe_*-if00)
+	BMP_PORT_CANDIDATES := $(wildcard /dev/serial/by-id/usb-*Black_Magic_Probe_*-if00)
 	ifeq ($(words $(BMP_PORT_CANDIDATES)),1)
 		BMP_PORT := $(BMP_PORT_CANDIDATES)
 	else
@@ -28,7 +28,7 @@ ifeq ($(BMP_PORT),)
 endif
 
 ifeq ($(SERIAL_PORT),)
-	SERIAL_PORT_CANDIDATES := $(wildcard /dev/serial/by-id/usb-Black_Sphere_Technologies_Black_Magic_Probe_*-if02)
+	SERIAL_PORT_CANDIDATES := $(wildcard /dev/serial/by-id/usb-*Black_Magic_Probe_*-if02)
 	ifeq ($(words $(SERIAL_PORT_CANDIDATES)),1)
 		SERIAL_PORT := $(SERIAL_PORT_CANDIDATES)
 	else
@@ -44,7 +44,7 @@ install:
 	
 	$(GDB) -nx --batch \
 		-ex 'target extended-remote $(BMP_PORT)' \
-		-x black_magic_probe_flash.scr \
+		-x bmp.scr \
 		$(PROJECT).elf
 
 picocom:
