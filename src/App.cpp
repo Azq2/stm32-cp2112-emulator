@@ -26,13 +26,13 @@ void App::initHw() {
 	
 	delay_init();
 	
-	// PA9 & PA10 - UART
-	gpio_set_mode(GPIO_BANK_USART1_TX, GPIO_MODE_OUTPUT_2_MHZ, GPIO_CNF_OUTPUT_ALTFN_PUSHPULL, GPIO_USART1_TX);
-	gpio_set_mode(GPIO_BANK_USART1_RX, GPIO_MODE_INPUT, GPIO_CNF_INPUT_FLOAT, GPIO_USART1_RX);
+	// UART
+	gpio_set_mode(GPIO_BANK_USART3_TX, GPIO_MODE_OUTPUT_2_MHZ, GPIO_CNF_OUTPUT_ALTFN_PUSHPULL, GPIO_USART3_TX);
+	gpio_set_mode(GPIO_BANK_USART3_RX, GPIO_MODE_INPUT, GPIO_CNF_INPUT_FLOAT, GPIO_USART3_RX);
 	
 	// UART for debug
-	rcc_periph_clock_enable(RCC_USART1);
-	uart_simple_setup(USART1, 115200, true);
+	rcc_periph_clock_enable(RCC_USART3);
+	uart_simple_setup(USART3, 115200, true);
 	
 	// PC13 - status led
 	gpio_set_mode(GPIOC, GPIO_MODE_OUTPUT_2_MHZ, GPIO_CNF_OUTPUT_OPENDRAIN, GPIO13);
@@ -45,7 +45,7 @@ int App::run() {
 	printf("Init usb...\r\n");
 	m_usb.init();
 	
-	printf("Polling...\r\n");
+	//printf("Polling...\r\n");
 	while (true) {
 		m_usb.poll();
 	}

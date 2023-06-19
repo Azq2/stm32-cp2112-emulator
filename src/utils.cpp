@@ -43,7 +43,7 @@ extern "C" int _write(int file, char *ptr, int len) {
 	int i;
 	if (uart_for_prinf && (file == STDOUT_FILENO || file == STDERR_FILENO)) {
 		for (i = 0; i < len; ++i)
-			usart_send_blocking(USART1, ptr[i]);
+			usart_send_blocking(uart_for_prinf, ptr[i]);
 		return i;
 	}
 	errno = EIO;
